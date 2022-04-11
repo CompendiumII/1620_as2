@@ -7,9 +7,9 @@ const notes = [
 ]
 
 const baseTemp = `
-<textarea id = 'textBox' rows="50" cols="85" placeholder = "Enter Note..."></textarea>
-<button class="Save">Save</button>
-<button class="Delete">Delete</button>
+<textarea class="textbox" rows="50" cols="85" placeholder = "Enter Note..."></textarea>
+<button class="save">Save</button>
+<button class="delete">Delete</button>
 `
 
 function emptyNote(template){
@@ -22,9 +22,46 @@ function clearWrite(){
   writeArea.innerHTML = ''
 }
 
-function createNote (){
+function getNote(){
+  const textBoxArea = document.querySelector('.textbox')
+  return textBoxArea.value
+}
+
+function splitNote(note){
+  const splitContent = note.split('\n')
+  return splitContent
+}
+
+function getTitle(){
+  const noteContent = splitNote(getNote())
+  return noteContent[0]                         
+}
+
+function addToNotes(){
+  var finalNote = ''
+  splitContent = splitNote(getNote())
+  splitContent.splice(0, 1)
+  for (const x of splitContent){
+    finalNote += x
+    finalNote += '\n'
+  }
+  notes.push({
+    title: getTitle(),
+    noteBody: finalNote,
+    id: notes.length + 1
+  })
+}
+
+function saveNote(){
+  addToNotes()
+  clearWrite()
+}
+
+function createNote(){
   emptyNote(baseTemp)
-  delBtn = document.querySelector('.Delete')
+  const savBtn = document.querySelector('.save')
+  const delBtn = document.querySelector('.delete')
+  savBtn.addEventListener('click', saveNote)
   delBtn.addEventListener('click', clearWrite)
 }
 
