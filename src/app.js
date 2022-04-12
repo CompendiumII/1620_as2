@@ -6,16 +6,19 @@ const notes = [
   }
 ]
 const baseTemp = `
-<textarea class="textbox" rows="50" cols="85" placeholder = "Enter Note..."></textarea>
+<textarea class="textbox" rows="25" cols="50" placeholder = "Enter Note..."></textarea>
 <button class="save">Save</button>
 <button class="delete">Delete</button>
 `
 const readTemp = `
-  <button class="close">X</button>
-  <textarea readonly class = 'readArea' rows="40" cols="80"></textarea>
+  <button class="close">x</button>
+  <div>
+    <h1 class = "readTitle"></h1>
+    <p class = "readBody"></h1>
+  </div>
   `
-
 var noteID = 1
+var checked = false
 
 function enableAddButton(){
   const addButton = document.querySelector('.icons')
@@ -101,14 +104,18 @@ function displayReadOnly(noteID){
   disableAddButton()
   const closeBtn = document.querySelector('.close')
   closeBtn.addEventListener('click', clearRead)
+  var displayedTitle = ''
   var displayedNote = ''
   for (const x of notes){
     if (noteID == x.id){
-      displayedNote = x.title + '\n' + x.noteBody
+      displayedTitle = x.title
+      displayedNote = x.noteBody
     }
   }
-  const readArea = document.querySelector('.readArea')
-  readArea.innerHTML = displayedNote
+  const noteTitle = document.querySelector('.readTitle')
+  const noteBody = document.querySelector('.readBody')
+  noteTitle.innerHTML = displayedTitle
+  noteBody.innerHTML = displayedNote
 }
 
 function lastNoteIntoButton(){
@@ -131,8 +138,25 @@ function createNote(){
 
 function initPage(){
   enableAddButton()
+  createCheck()
   addTitleToNav(notes[0].title)
   lastNoteIntoButton()
+}
+
+function darkMode(){
+  const page = document.querySelector('.main-container')
+  if (checked == false){
+    page.classList.replace('light-theme', 'dark-theme')
+    checked = true
+  } else if (checked == true){
+    page.classList.replace('dark-theme', 'light-theme')
+    checked = false
+  }
+}
+
+function createCheck(){
+  const checkBox = document.querySelector('.theme-toggle')
+  checkBox.addEventListener('click', darkMode)
 }
 
 initPage()

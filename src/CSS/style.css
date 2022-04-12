@@ -17,9 +17,9 @@
   --text:     var(--not-black);
 }
 
-/* .dark-theme { */
-/*   --bg-color: var(--not-grey); */
-/* } */
+.dark-theme { 
+  --bg-color: var(--not-grey); 
+} 
 
 * {
   margin: 0;
@@ -139,3 +139,50 @@ footer p {
   list-style: none;
   text-align: center;
 }
+
+.notes-list li{
+  font-size: 14px;
+}
+
+button {
+  background-color: var(--not-red);
+  color: var(--not-black);
+  border: none;
+  padding: 5px;
+  text-align: center;
+  font-size: 12px;
+}
+
+textarea{
+  background-color: var(--not-green);
+  color: var(--not-white);
+  font-size: 15px;
+}
+
+.theme-toggle {
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin: 20px, 10px;
+}
+
+.read-note-area {
+  display:flex;
+}
+
+.close {
+  margin-bottom: 465px;
+  text-align: top;
+}
+
+.read-note-area h1{
+  font-family: 'Quicksand', sans-serif;
+  font-size: var(--hdr-hght);
+  color: var(--not-black)
+}
+
+.read-note-area{
+  background-color: var(--not-green);
+  color: var(--not-white);
+}
+
