@@ -10,7 +10,12 @@ const baseTemp = `
 <button class="save">Save</button>
 <button class="delete">Delete</button>
 `
-const noteID = 1
+const readTemp = `
+  <button class="close">X</button>
+  <textarea readonly class = 'readArea' rows="40" cols="80"></textarea>
+  `
+
+var noteID = 1
 
 function enableAddButton(){
   const addButton = document.querySelector('.icons')
@@ -33,6 +38,12 @@ function clearWrite(){
   enableAddButton()
 }
 
+function clearRead(){
+  const readArea = document.querySelector('.read-note-area')
+  readArea.innerHTML = ''
+  enableAddButton()
+}
+
 function getNote(){
   const textBoxArea = document.querySelector('.textbox')
   return textBoxArea.value
@@ -52,6 +63,7 @@ function addTitleToNav(title){
   const selectNav = document.querySelector('.notes-list')
   const li = document.createElement('li')
   li.className = noteID
+  noteID ++
   li.appendChild(document.createTextNode(title))
   selectNav.appendChild(li)
 }
@@ -75,6 +87,37 @@ function saveNote(){
   addTitleToNav(getTitle())
   addToNotes()
   clearWrite()
+  lastNoteIntoButton()
+}
+
+function createRead(){
+  const readArea = document.querySelector('.read-note-area')
+  readArea.innerHTML = readTemp
+}
+
+function displayReadOnly(noteID){
+  createRead()
+  clearWrite()
+  disableAddButton()
+  const closeBtn = document.querySelector('.close')
+  closeBtn.addEventListener('click', clearRead)
+  var displayedNote = ''
+  for (const x of notes){
+    if (noteID == x.id){
+      displayedNote = x.title + '\n' + x.noteBody
+    }
+  }
+  const readArea = document.querySelector('.readArea')
+  readArea.innerHTML = displayedNote
+}
+
+function lastNoteIntoButton(){
+  const noteList = document.querySelector('.notes-list')
+  const lastNote = noteList.lastChild
+  lastNote.addEventListener('click', (evt) => {
+    const noteID = evt.target.className
+    displayReadOnly(noteID)
+  })
 }
 
 function createNote(){
@@ -88,6 +131,8 @@ function createNote(){
 
 function initPage(){
   enableAddButton()
+  addTitleToNav(notes[0].title)
+  lastNoteIntoButton()
 }
 
 initPage()
