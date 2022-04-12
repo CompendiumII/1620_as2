@@ -11,6 +11,15 @@ const baseTemp = `
 <button class="save">Save</button>
 <button class="delete">Delete</button>
 `
+function enableAddButton(){
+  const addButton = document.querySelector('.icons')
+  addButton.addEventListener('click', createNote)
+}
+
+function disableAddButton(){
+  const addButton = document.querySelector('.icons')
+  addButton.removeEventListener('click', createNote)
+}
 
 function emptyNote(template){
   const noteDisplayArea = document.querySelector('.write-note-area')
@@ -20,6 +29,7 @@ function emptyNote(template){
 function clearWrite(){
   const writeArea = document.querySelector('.write-note-area')
   writeArea.innerHTML = ''
+  enableAddButton()
 }
 
 function getNote(){
@@ -59,15 +69,11 @@ function saveNote(){
 
 function createNote(){
   emptyNote(baseTemp)
+  disableAddButton()
   const savBtn = document.querySelector('.save')
   const delBtn = document.querySelector('.delete')
   savBtn.addEventListener('click', saveNote)
   delBtn.addEventListener('click', clearWrite)
-}
-
-function enableAddButton(){
-  const addButton = document.querySelector('.icons')
-  addButton.addEventListener('click', createNote)
 }
 
 function initPage(){
