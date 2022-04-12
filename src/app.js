@@ -5,12 +5,13 @@ const notes = [
     id: 1 
   }
 ]
-
 const baseTemp = `
 <textarea class="textbox" rows="50" cols="85" placeholder = "Enter Note..."></textarea>
 <button class="save">Save</button>
 <button class="delete">Delete</button>
 `
+const noteID = 1
+
 function enableAddButton(){
   const addButton = document.querySelector('.icons')
   addButton.addEventListener('click', createNote)
@@ -47,6 +48,14 @@ function getTitle(){
   return noteContent[0]                         
 }
 
+function addTitleToNav(title){
+  const selectNav = document.querySelector('.notes-list')
+  const li = document.createElement('li')
+  li.className = noteID
+  li.appendChild(document.createTextNode(title))
+  selectNav.appendChild(li)
+}
+
 function addToNotes(){
   var finalNote = ''
   splitContent = splitNote(getNote())
@@ -63,6 +72,7 @@ function addToNotes(){
 }
 
 function saveNote(){
+  addTitleToNav(getTitle())
   addToNotes()
   clearWrite()
 }

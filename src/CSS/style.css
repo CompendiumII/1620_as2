@@ -134,3 +134,8 @@ footer p {
   color: var(--text);
   font-size: var(--lrg-txt);
 }
+
+.notes-list {
+  list-style: none;
+  text-align: center;
+}
