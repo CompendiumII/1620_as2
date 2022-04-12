@@ -7,8 +7,10 @@ const notes = [
 ]
 const baseTemp = `
 <textarea class="textbox" rows="25" cols="50" placeholder = "Enter Note..."></textarea>
-<button class="save">Save</button>
-<button class="delete">Delete</button>
+<div>
+  <button class="save">Save</button>
+  <button class="delete">Delete</button>
+</div>
 `
 const readTemp = `
   <button class="close">x</button>
